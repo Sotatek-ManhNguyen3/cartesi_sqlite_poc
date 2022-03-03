@@ -53,7 +53,7 @@ $(BINARIES) &:
 	@wget -q -nc -i dependencies -P .
 	@shasum -c shasumfile
 
-$(DAPP_FS_BIN): api.py run.sh
+$(DAPP_FS_BIN): echo.py run.sh
 	@echo "Building echo-dapp filesystem..."
 	@if docker inspect $(CONTAINER_NAME) > /dev/null 2>&1; then \
 		docker rm -f $(CONTAINER_NAME) > /dev/null; \
