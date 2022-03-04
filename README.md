@@ -4,16 +4,15 @@ This example shows how to build and interact with a minimalistic Cartesi Rollups
 
 ## Building the environment
 
-To run the echo example, clone the repository as follows:
+To run the sqlite poc example, clone the repository as follows:
 
 ```shell
-$ git clone https://github.com/cartesi/rollups-examples.git
+$ git clone git@github.com:Sotatek-ManhNguyen3/cartesi_sqlite_poc.git
 ```
 
 Then, build the back-end for the echo example:
 
 ```shell
-$ cd rollups-examples/echo
 $ make machine
 ```
 
@@ -51,7 +50,7 @@ $ docker-compose down -v
 With the infrastructure in place, go to a separate terminal window and send an input as follows:
 
 ```shell
-$ docker exec echo_hardhat_1 npx hardhat --network localhost echo:addInput --input "0x636172746573690D0A"
+$ docker exec sql-poc_hardhat_1 npx hardhat --network localhost sqlite3:addInput --input "0x73656C656374202A2066726F6D20626F6F6B73"
 ```
 
 The input will have been accepted when you receive a response similar to the following one:
