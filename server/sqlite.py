@@ -51,13 +51,18 @@ def advance():
     conn.row_factory = dict_factory
     query = query.decode()
     print(query)
-    with conn:
-        cur = conn.cursor()
-        result = cur.execute(query)
-    if query.strip()[:6].upper() == "SELECT":
-        result = json.dumps(result.fetchall())
-    else:
-        result = "success"
+
+    try:
+        with conn:
+            cur = conn.cursor()
+            result = cur.execute(query)
+        if query.strip()[:6].upper() == "SELECT":
+            result = json.dumps(result.fetchall())
+        else:
+            result = "success"
+    except Exception as e:
+        result = "EXCEPTION: " + e.__str__()
+        print("NOTICE EXCEPTION" + e.__str__())
 
     print("Adding notice")
     result = "0x" + result.encode().hex()
