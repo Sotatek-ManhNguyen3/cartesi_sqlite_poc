@@ -1,3 +1,12 @@
+This example shows a simple book catalog DApp based on SQLite database running inside the cartesi machine.
+
+## How this example works
+User will send an input as a sql query to get, insert, update or delete books info, The cartesi rollups will receive input and return the result.
+
+- If the query is insert, update or delete, the result will be "success"
+- If there are any errors, the result will be a string with description of the error. Example: "EXCEPTION: syntax error"
+- If the query is get, the result will be the data from database
+
 The books table contain 3 column:
 
 | Column name | Data type |
@@ -56,6 +65,13 @@ With the infrastructure in place, go to a separate terminal window and send an i
 ```shell
 $ docker exec cartesi_sqlite_poc_hardhat_1 npx hardhat --network localhost sqlite3:addInput --input "0x73656C656374202A2066726F6D20626F6F6B73"
 ```
+This input means `select * from books`
+
+You can replace this query by another query to retrieve the expected result. Such as:
+
+`INSERT INTO books VALUES (2, "Book 2", 30)`
+
+`SELECT * FROM books WHERE name = "Book 2"`
 
 The input will have been accepted when you receive a response similar to the following one:
 
@@ -74,3 +90,4 @@ The response should be something like this:
 ```shell
 {"data":{"GetNotice":[{"session_id":"default_rollups_id","epoch_index":"0","input_index":"0","notice_index":"0","payload":"5b5d"}]}}
 ```
+The data in payload is `[]`, it means there is no record of books in the database yet
